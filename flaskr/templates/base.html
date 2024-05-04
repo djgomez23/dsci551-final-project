@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <div class="logo-header">
+    <title>WA Pet Shelters Assistant</title>
+    <img src="{{url_for('static', filename='imgs/DSCI551_project_logos_cats1.png')}}" />
+  </div>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://kit.fontawesome.com/1e8ba41f62.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>WA Pet Shelters Assistant</h1>
+  </header>
+  <section class="login">
+    {% if g.user %}
+      <button class="auth-btn"><a href="{{ url_for('auth.logout') }}">Log Out</a></button>
+    {% else %}
+      <button class="auth-btn"><a href="{{ url_for('auth.login') }}">Log In</a></button>
+    {% endif %}
+    <button class="shelter-directory"><a href="{{ url_for('shelter_directory.shelter_directory') }}">View Shelter Directory</a></button>
+  </section>
+  <br />
+  <section class="main-content">
+    {% block content %}{% endblock %}
+    
+  </section>
+</body>
+</html>

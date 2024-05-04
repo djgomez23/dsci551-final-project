@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<button class="icon-button"><a href="{{ url_for('dbm_query.dbm_query')}}"><i class="fa-solid fa-arrow-left"></i></a></button>
+{% block header %}
+<h2>Search for an Animal Shelter</h2>
+{% endblock %}
+{% if (results_present) %}
+    <!-- this block will display search results -->
+    <h3>Search Results</h3>
+    {% for x in query_results %}
+        {% for j in x %}
+        <p>{{ j }}: {{ x[j] }}</p>
+        {% endfor %}
+    {% endfor %}
+{% else %}    
+    <form method="post" action="{{ url_for('dbm_query.search.shelter')  }}">
+
+        <label for="shelter_name">Animal Shelter Name: </label>
+        <select name="shelter_name">
+            <!-- for loop here after finding distinct animal types from database -->
+            {% for x in shelter_list %}
+            <option value="{{ x }}">{{ x }}</option>
+            {% endfor %}
+        </select>
+        <br />
+        <br />
+        <label for="city">City: </label>
+        <input type="text" name="city">
+        <br />
+        <br />
+        <button type="submit" required>Submit</button>
+
+    </form>
+    
+{% endif %}
+{% endblock %}

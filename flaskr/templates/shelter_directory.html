@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="button-container">
+    {% if g.user %}
+        {% if session["access"] == 'employee' %}
+            <button class="icon-button"><a href="{{ url_for('employee.petSearch')}}"><i class="fa-solid fa-arrow-left"></i></a></button>
+        {% else %}
+            <button class="icon-button"><a href="{{ url_for('dbm_query.dbm_query')}}"><i class="fa-solid fa-arrow-left"></i></a></button>
+        {% endif %}
+    {% else %}
+        <button class="icon-button"><a href="{{ url_for('auth.login')}}"><i class="fa-solid fa-arrow-left"></i></a></button>
+    {% endif %}
+</div>
+{% block header %}
+<div class="directory-header">
+    <h2>Shelter Directory</h2>
+    <img src="{{ url_for('static', filename='imgs/DSCI551_project_logos_cats2.png') }}"/>
+    <p>Organized by city name</p>
+</div>
+{% endblock %}
+<!---
+<div id="alphabet">
+    {% for x in shelter_results.keys() %}
+    <span><a href="#{{ x }}-section">{{ x }}</a></span>
+    {% endfor %}
+</div>
+-->
+{% for x in shelter_results %}
+<h3 id="{{ x }}-section"><strong>{{ x }}</strong></h3>
+<h4><strong>{{ shelter_results[x]["name"] }}</strong></h4>
+    {% if shelter_results[x]["city"] %}
+        <p>{{ shelter_results[x]["city"] }}</p>
+    {% endif %}
+    {% if shelter_results[x]["phone_number"] %}
+        <p>{{ shelter_results[x]["phone_number"] }}</p>
+    {% endif %}
+    {% if shelter_results[x]["email"] %}
+        <p>{{ shelter_results[x]["email"] }}</p>
+    {% endif %}
+    {% if shelter_results[x]["website"] %}
+        <p>{{ shelter_results[x]["website"] }}</p>
+    {% endif %}
+    <br />
+{% endfor %}
+{% endblock %}

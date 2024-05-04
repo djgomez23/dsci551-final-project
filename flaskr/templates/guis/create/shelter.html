@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<button class="icon-button"><a href="{{ url_for('dbm_query.dbm_query')}}"><i class="fa-solid fa-arrow-left"></i></a></button>
+
+{% block header %}
+<h3>Create New Shelter</h3>
+{% endblock %}
+
+
+<form method="post" action="{{ url_for('dbm_query.create.shelter') }}">
+    {% for o in query_options %}
+    <label for="{{ o.option[0] }}">{{ o.option[1] }}</label>
+    <input name="{{ o.option[0] }}" type="text">
+    <br />
+    <br />
+    {% endfor %}
+    <button type="submit" required>Submit</button>
+</form>
+{% endblock %}

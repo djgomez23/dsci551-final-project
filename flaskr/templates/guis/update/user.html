@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<button class="icon-button"><a href="{{ url_for('dbm_query.dbm_query')}}"><i class="fa-solid fa-arrow-left"></i></a></button>
+<br />
+{% block header %}
+<h2>Update User</h2>
+{% endblock %}
+<form method="post" action="{{ url_for('dbm_query.update.user') }}">
+    {% for o in query_options %}
+    <label for="{{ o.option[0] }}">{{ o.option[1] }}</label>
+    {% if (o.option[0] == 'new_password') %}
+        <input name="{{ o.option[0] }}" type="password">
+    {% else %}
+        <input name="{{ o.option[0] }}" type="text">
+    {% endif %}
+    <br />
+    <br />
+    {% endfor %}
+    <button type="submit" required>Submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<button class="icon-button"><a href="{{ url_for('dbm_query.dbm_query')}}"><i class="fa-solid fa-arrow-left"></i></a></button>
+{% block header %}
+<h2>Search for a User</h2>
+{% endblock %}
+{% if (results_present) %}
+    <!-- this block will display search results -->
+    <h3>Search Results</h3>
+    {% for x in query_results %}
+        {% for j in x %}
+        <p>{{ j }}: {{ x[j] }}</p>
+        {% endfor %}
+    {% endfor %}
+{% else %}    
+    <form method="post" action="{{ url_for('dbm_query.search.user')  }}">
+
+        <label for="username">Username: </label>
+        <input type="text" name="username">
+        <br />
+        <br />
+        <label for="first_name">First Name: </label>
+        <input type="text" name="first_name">
+        <br />
+        <br />
+        <label for="last_name">Last Name: </label>
+        <input type="text" name="last_name">
+        <br />
+        <br />
+        <datalist id="shelter_data">
+            {% for x in shelter_list %}
+            <option>{{ x }}</option>
+            {% endfor %}
+        </datalist>
+        <label for="shelter_name">Animal Shelter Name</label>
+        <input type="text" name="shelter_name" list="shelter_data" autocomplete="off" id="dbm_shelter_user_srch">
+        <br />
+        <br />
+        <button type="submit" required>Submit</button>
+
+    </form>
+    
+{% endif %}
+{% endblock %}

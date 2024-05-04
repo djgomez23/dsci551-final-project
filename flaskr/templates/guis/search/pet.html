@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% block content %}
+<button class="icon-button"><a href="{{ url_for('dbm_query.dbm_query')}}"><i class="fa-solid fa-arrow-left"></i></a></button>
+
+
+<div class="search-content">
+{% block header %}
+<h2>Search for a Pet</h2>
+{% endblock %}
+{% if (results_present) %}
+    <!-- this block will display search results -->
+    <h3>Search Results</h3>
+    {% for x in query_results %}
+        {% for j in x %}
+        <p>{{ j }}: {{ x[j] }}</p>
+        {% endfor %}
+        <br />
+        <br />
+    {% endfor %}
+{% else %}
+
+    <form method="post" action="{{ url_for('dbm_query.search.pet')  }}">
+        <label for="pet_name">Name: </label>
+        <input type="text" name="pet_name">
+        <br />
+        <input type="radio" name="name_param" value="like">
+        <label for="name_param">Like</label>
+        <br />
+        <input type="radio" name="name_param" value="equal_to">
+        <label for="name_param">Equal To</label>
+        <br />
+        <br />
+
+        <label for="microchip">Microchip Number: </label>
+        <input type="text" name="microchip">
+
+        <p>Gender: </p>
+        <input type="radio" name="gender" value="female">
+        <label for="gender">Female</label>
+        <br />
+        <input type="radio" name="gender" value="male">
+        <label for="gender">Male</label>
+        <br />
+        <br />
+
+        <datalist id="pet_type_data">
+            {% for x in pet_type_list %}
+            <option>{{ x }}</option>
+            {% endfor %}
+        </datalist>
+        <label for="pet_type">Pet Type:</label>
+        <input type="text" name="pet_type" list="pet_type_data" autocomplete="off" id="dbm_pet_type_srch">
+
+        <p>Color of Markings: </p>
+        <input type="checkbox" name="color1" value="brown">
+        <label for="color1">Brown</label>
+        <input type="checkbox" name="color2" value="black">
+        <label for="color2">Black</label>
+        <input type="checkbox" name="color3" value="gray">
+        <label for="color3">Gray</label>
+        <input type="checkbox" name="color4" value="tabby">
+        <label for="color4">Tabby</label>
+        <br />
+        <input type="checkbox" name="color5" value="white">
+        <label for="color5">White</label>
+        <input type="checkbox" name="color6" value="spotted">
+        <label for="color6">Spotted</label>
+        <input type="checkbox" name="color7" value="calico">
+        <label for="color7">Calico</label>
+        <input type="checkbox" name="color8" value="yellow">
+        <label for="color8">Yellow</label>
+        <input type="checkbox" name="color9" value="red">
+        <label for="color9">Red</label>
+        <br />
+        <input type="checkbox" name="color10" value="green">
+        <label for="color10">Green</label>
+        <input type="checkbox" name="color11" value="blue">
+        <label for="color11">Blue</label>
+        <br />
+        <br />
+
+        <datalist id="breed_data">
+            {% for x in breed_list %}
+            <option>{{ x }}</option>
+            {% endfor %}
+        </datalist>
+        <label for="breed">Pet Breed:</label>
+        <input type="text" name="breed" list="breed_data" autocomplete="off" id="dbm_breed_srch">
+
+        <p>Neutered or Spayed?</p>
+        <input type="radio" name="fixed" value="True">
+        <label for="fixed">Yes</label>
+        <input type="radio" name="fixed" value="False">
+        <label for="fixed">No</label>
+
+        <p>Adopted?</p>
+        <input type="radio" name="adopted" value="True">
+        <label for="adopted">Yes</label>
+        <input type="radio" name="adopted" value="False">
+        <label for="adopted">No</label>
+        <br />
+        <br />
+
+        <label for="adoption_date">Adoption Date: </label>
+        <input type="date" name="adoption_date">
+        <br />
+        <input type="radio" name="adoption_param" value="lt">
+        <label for="adoption_param">Less Than</label>
+        <br />
+        <input type="radio" name="adoption_param" value="lte">
+        <label for="adoption_param">Less Than or Equal To</label>
+        <br />
+        <input type="radio" name="adoption_param" value="eq">
+        <label for="adoption_param">Equal To</label>
+        <br />
+        <input type="radio" name="adoption_param" value="gte">
+        <label for="adoption_param">Greater Than or Equal To</label>
+        <br />
+        <input type="radio" name="adoption_param" value="gt">
+        <label for="adoption_param">Greater Than</label>
+        <br />
+        <br />
+
+        <datalist id="shelter_data">
+            {% for x in shelter_list %}
+            <option>{{ x }}</option>
+            {% endfor %}
+        </datalist>
+        <label for="shelter_name">Animal Shelter of Residence</label>
+        <input type="text" name="shelter_name" list="shelter_data" autocomplete="off" id="dbm_shelter_srch">
+        <br />
+        <br />
+
+        <label for="birthday">Birthday: </label>
+        <input type="date" name="birthday">
+        <br />
+        <input type="radio" name="age_param" value="lt">
+        <label for="age_param">Less Than</label>
+        <br />
+        <input type="radio" name="age_param" value="lte">
+        <label for="age_param">Less Than or Equal To</label>
+        <br />
+        <input type="radio" name="age_param" value="eq">
+        <label for="age_param">Equal To</label>
+        <br />
+        <input type="radio" name="age_param" value="gte">
+        <label for="age_param">Greater Than or Equal To</label>
+        <br />
+        <input type="radio" name="age_param" value="gt">
+        <label for="age_param">Greater Than</label>
+        <br />
+
+        <p>Ideal Home:</p>
+        <input type="checkbox" name="home_preference1" value="quiet">
+        <label for="home_preference1">Quiet</label>
+        <br />
+        <input type="checkbox" name="home_preference2" value="kids_okay">
+        <label for="home_preference2">Okay with Children</label>
+        <br />
+        <input type="checkbox" name="home_preference3" value="dogs_okay">
+        <label for="home_preference3">Okay with Dogs</label>
+        <br />
+        <input type="checkbox" name="home_preference4" value="cats_okay">
+        <label for="home_preference4">Okay with Cats</label>
+        <br />
+        <input type="checkbox" name="home_preference5" value="other_pets_okay">
+        <label for="home_preference5">Okay with Other Pets</label>
+        <br />
+        <input type="checkbox" name="home_preference6" value="barn_cat">
+        <label for="home_preference6">Barn Cat (i.e., not a house cat)</label>
+        <br />
+        <input type="checkbox" name="home_preference7" value="outdoor">
+        <label for="home_preference7">Outdoor</label>
+        <br />
+        <input type="checkbox" name="home_preference8" value="indoor">
+        <label for="home_preference8">Indoor</label>
+        <br />
+
+        <p>Temperament:</p>
+        <input type="checkbox" name="temperament1" value="anxious">
+        <label for="temperament1">Anxious</label>
+        <br />
+        <input type="checkbox" name="temperament2" value="cuddly">
+        <label for="temperament2">Cuddly</label>
+        <br />
+        <input type="checkbox" name="temperament3" value="curious">
+        <label for="temperament3">Curious</label>
+        <br />
+        <input type="checkbox" name="temperament4" value="friendly">
+        <label for="temperament4">Friendly</label>
+        <br />
+        <input type="checkbox" name="temperament5" value="quiet">
+        <label for="temperament5">Quiet</label>
+        <br />
+        <input type="checkbox" name="temperament6" value="playful">
+        <label for="temperament6">Playful</label>
+        <br />
+        <input type="checkbox" name="temperament7" value="affectionate">
+        <label for="temperament7">Affectionate</label>
+        <br />
+        <input type="checkbox" name="temperament8" value="couch_potato">
+        <label for="temperament8">Couch Potato</label>
+
+        <p>Previously Adopted</p>
+        <input type="radio" name="previously_adopted" value="True">
+        <label for="previously_adopted">Yes</label>
+        <input type="radio" name="previously_adopted" value="False">
+        <label for="previously_adopted">No</label>
+        <br />
+        <br />
+        <button type="submit" required>Submit</button>
+
+    </form>
+{% endif %}
+{% endblock %}
+</div>

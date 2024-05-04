@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Welcome{% endblock %}</h1>
+  {% if (g.user and user_access="db_manager") %}
+    <h1>Welcome, Database Manager</h1>
+    <button type="submit" action="{{ url_for('guis.db_manager') }}">Database Query</button>
+  {% else %}
+    <h1>Welcome, Employee</h1>
+    <button type='submit' action="{{ url_for('employee')}}">Search For Pet</button>
+    <button>View Shelter Directory</button>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+
+
+{% endblock %}

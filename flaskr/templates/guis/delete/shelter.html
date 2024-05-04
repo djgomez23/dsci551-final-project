@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<button class="icon-button"><a href="{{ url_for('dbm_query.dbm_query')}}"><i class="fa-solid fa-arrow-left"></i></a></button>
+<br />
+{% block header %}
+    <h2>Delete Shelter Data</h2>
+{% endblock %}
+
+<form method="post" action="{{ url_for('dbm_query.delete.shelter') }}">
+    {% for o in query_options %}
+    <label for="{{ o.option[0] }}">{{ o.option[1] }}</label>
+    <input name="{{ o.option[0] }}" type="text">
+    <br />
+    <br />
+    {% endfor %}
+    <button type="submit" onclick="return confirm('Are you sure?')" required>Submit</button>
+</form>
+{% endblock %}

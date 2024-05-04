@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: sans-serif;
+    background-color: #ECE2D0;
+    color: #27233A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-button {
+    color: #27233A;
+    font-size: 16pt;
+    border: none;
+    background-color: #ECE2D0;
+}
+
+.auth-btn, .shelter-directory {
+    background-color: #ECE2D0;
+    font-size: 16pt;
+}
+
+a {
+    color: #27233A;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #B33F62;
+}
+
+.main-content {
+    margin-left: 10%;
+    margin-right: 20%;
+}
+
+.logo-header {
+    display: inline;
+}
+
+.logo-header img {
+    width: 10em;
+}
+
+.directory-header {
+    display: inline;
+}
+
+.directory-header img {
+    width: 3em;
+}
