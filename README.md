@@ -8,6 +8,7 @@ Commands for operation
 - For database manager, login with username: chocoCat, password: dsci551
 - Employee, login with username: donut, password: donutShop
 - Fill out forms and see your results
+
 File structure
 - The project source code is found in the flaskr folder.
 - The python script used to import the initial data is found in the import_data.ipynb file outside of the flaskr folder.
